@@ -1,12 +1,11 @@
 fn main() {
-  let mut counter = 0;
+    use std::collections::HashMap;
 
-  let result = loop {
-    counter += 1;
-    if counter == 10 {
-      break counter * 2;
-    }
-  };
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+    scores.entry(String::from("Yellow")).or_insert(50);
+    scores.entry(String::from("Blue")).or_insert(50);
 
-  println!("The result is {result}");
+    println!("{:?}", scores);
+    // {"Yellow": 50, "Blue": 10}
 }
