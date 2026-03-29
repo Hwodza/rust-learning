@@ -16,6 +16,7 @@
           cargo
           rust-analyzer
           rustlings
+          clippy
         ];
       };
       packages.${system}.default = pkgs.rustPlatform.buildRustPackage {
