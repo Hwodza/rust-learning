@@ -14,6 +14,7 @@
       packages = with pkgs; [
         rustc
         cargo
+        rustup
         rust-analyzer
         rustlings
         clippy
