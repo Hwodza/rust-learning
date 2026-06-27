@@ -3,28 +3,21 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
-  outputs =
-    { self, nixpkgs }:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
-    in
-    {
-      devShells.${system}.default = pkgs.mkShell {
-        packages = with pkgs; [
-          rustc
-          cargo
-          rust-analyzer
-          rustlings
-          clippy
-        ];
-      };
-      packages.${system}.default = pkgs.rustPlatform.buildRustPackage {
-        pname = "myapp";
-        version = "0.0.1";
-        cargoLock.lockFile = ./Cargo.lock;
-        src = pkgs.lib.cleanSource ./.;
-      };
+  outputs = {
+    self,
+    nixpkgs,
+  }: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {inherit system;};
+  in {
+    devShells.${system}.default = pkgs.mkShell {
+      packages = with pkgs; [
+        rustc
+        cargo
+        rust-analyzer
+        rustlings
+        clippy
+      ];
     };
     packages.${system}.default = pkgs.rustPlatform.buildRustPackage {
       pname = "myapp";
